@@ -236,6 +236,18 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 .nw-scripture .ref{font-family:'Cormorant SC',serif; letter-spacing:.1em; text-transform:uppercase;
   font-size:.64rem; color:var(--lm,var(--gold)); margin-top:.5rem}
 
+/* creeds — the church's words (upright, not italic like Scripture); a framed tablet */
+.nw-creed{margin:1.8rem 0; padding:1.3rem 1.5rem 1.2rem; background:linear-gradient(180deg,#faf4e6,var(--cream));
+  border:1px solid #d9c79c; border-top:3px solid var(--lm,var(--gold)); border-radius:4px;
+  box-shadow:var(--shadow-s)}
+.nw-creed .ttl{font-family:'Cormorant SC',serif; letter-spacing:.14em; text-transform:uppercase;
+  font-size:.7rem; font-weight:600; color:var(--lm,var(--gold)); margin:0 0 .7rem;
+  padding-bottom:.55rem; border-bottom:1px solid #e4d6b4}
+.nw-creed p{margin:0 0 .8rem; font-size:1.01rem; line-height:1.62; color:var(--ink)}
+.nw-creed p:last-child{margin-bottom:0}
+.nw-creed .ed{color:var(--ink-mute); font-style:italic}
+.nw-creed .amen{font-variant:small-caps; letter-spacing:.04em; color:var(--ink-soft)}
+
 .nw-pull{margin:2rem 0; font-family:'Playfair Display',serif; font-style:italic; font-weight:500;
   font-size:1.5rem; line-height:1.3; color:var(--navy); text-align:center;
   padding:1rem 1.5rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
