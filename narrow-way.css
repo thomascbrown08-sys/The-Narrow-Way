@@ -1,0 +1,400 @@
+/* ============================================================================
+   THE NARROW WAY — Design System  ·  "The Illuminated Chronicle"
+   One continuous road. The sidebar is the map; each page is a milepost on it.
+   Literary / old-book aesthetic: parchment & ink, a night-navy road threaded
+   with a luminous gold path, living-water teal for movement and links.
+   ========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500;1,600&family=Crimson+Pro:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Cormorant+SC:wght@400;500;600&display=swap');
+
+:root{
+  /* paper & ink */
+  --parchment:#f1e9d6; --cream:#fbf7ed; --cream-2:#f6efe0;
+  --ink:#231d12; --ink-soft:#473f2e; --ink-mute:#8b806a; --line:#e2d7bf;
+  /* the night road */
+  --navy:#14203a; --navy-2:#0e1828; --navy-edge:#26324f;
+  /* light & water */
+  --gold:#b1843a; --gold-lt:#d8b066; --gold-glow:#f0d18f;
+  --teal:#1f6b63; --teal-lt:#2f8f84; --teal-pale:#e3efec;
+  /* feedback */
+  --shadow-s:0 1px 2px rgba(20,32,58,.06),0 3px 14px rgba(20,32,58,.07);
+  --shadow-m:0 6px 18px rgba(20,32,58,.10),0 18px 50px rgba(20,32,58,.12);
+  /* landmark signature hues (journey order) */
+  --lm-city:#9e4a31; --lm-slough:#5d6b78; --lm-worldly:#9a7b2e; --lm-gate:#1f6b63;
+  --lm-interp:#b07a1e; --lm-cross:#8a2433; --lm-hill:#6a5a36; --lm-palace:#6a4a7a;
+  --lm-apollyon:#3a3f5e; --lm-shadow:#34405e; --lm-vanity:#a85a32; --lm-castle:#454650;
+  --lm-mountains:#2f7a68; --lm-enchanted:#6f7a45; --lm-beulah:#c8893a; --lm-river:#3a6f8a;
+  --lm-city2:#c8a24a;
+  --sidebar-w:360px; --measure:38rem;
+}
+
+*{box-sizing:border-box}
+html.nw{font-size:20px; scroll-behavior:smooth; -webkit-text-size-adjust:100%}
+body.nw{
+  margin:0; color:var(--ink-soft);
+  font-family:'Crimson Pro',Georgia,serif; font-weight:400; line-height:1.78;
+  background-color:var(--parchment);
+  background-image:
+    radial-gradient(1200px 560px at 82% -8%, #fbf6ea 0%, transparent 58%),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");
+  -webkit-font-smoothing:antialiased; text-rendering:optimizeLegibility;
+}
+.nw a{color:var(--teal); text-decoration:none}
+/* underline on hover scoped to reading prose only — never nav, cards, mileposts */
+.nw-prose a:hover, .nw-walk-body a:hover{text-decoration:underline; text-underline-offset:3px; color:var(--teal-lt)}
+
+/* ── SHELL ─────────────────────────────────────────────────────────────── */
+.nw-shell{display:grid; grid-template-columns:var(--sidebar-w) 1fr; min-height:100vh}
+.nw-content{min-width:0; display:flex; flex-direction:column}
+
+/* ── THE ROAD (sidebar) ────────────────────────────────────────────────── */
+.nw-sidebar{
+  position:sticky; top:0; height:100vh; overflow-y:auto; z-index:40;
+  background:linear-gradient(177deg,var(--navy) 0%,var(--navy-2) 100%);
+  border-right:1px solid rgba(216,176,102,.18);
+  padding:1.6rem 0 3rem; color:rgba(241,233,214,.72);
+  scrollbar-width:thin; scrollbar-color:rgba(216,176,102,.38) transparent;
+}
+.nw-sidebar::-webkit-scrollbar{width:8px}
+.nw-sidebar::-webkit-scrollbar-thumb{background:rgba(216,176,102,.30); border-radius:8px}
+
+.nw-brand{display:block; padding:.2rem 1.6rem 1.15rem; margin-bottom:.5rem;
+  border-bottom:1px solid rgba(241,233,214,.12)}
+.nw-brand:hover{text-decoration:none}
+.nw-brand b{display:block; font-family:'Playfair Display',serif; font-weight:700;
+  font-size:1.5rem; letter-spacing:-.01em; color:#fbf7ed; line-height:1.02}
+.nw-brand span{display:block; margin-top:.4rem; font-family:'Cormorant SC',serif;
+  font-weight:500; letter-spacing:.18em; text-transform:uppercase;
+  font-size:.6rem; color:var(--gold-lt)}
+
+.nw-util{display:block; padding:.5rem 1.6rem; font-family:'Cormorant SC',serif;
+  letter-spacing:.1em; text-transform:uppercase; font-size:.72rem;
+  color:rgba(241,233,214,.72)}
+.nw-util:hover{color:#fff; text-decoration:none}
+.nw-util.start{color:var(--gold-lt)}
+.nw-util.here{color:#fff}
+.nw-roadlabel{font-family:'Cormorant SC',serif; letter-spacing:.16em;
+  text-transform:uppercase; font-size:.62rem; color:var(--gold);
+  padding:1.1rem 1.5rem .4rem; margin:0}
+
+/* ── THE TREE (indented, collapsible; active branch expanded) ──────────── */
+.nw-tree{padding:.1rem 0 .3rem}
+.nw-branch{position:relative}
+.nw-kids{position:relative; margin-left:1.15rem; padding-left:.05rem;
+  border-left:1px solid rgba(216,176,102,.22)}
+.nw-twig{display:flex; align-items:center; gap:.5rem; position:relative;
+  padding:.3rem 1rem .3rem 1.5rem; color:rgba(241,233,214,.66);
+  font-size:.82rem; line-height:1.2; border-left:3px solid transparent; text-decoration:none}
+.nw-twig:hover{color:#fff; background:rgba(255,255,255,.05); text-decoration:none}
+.nw-twig.nolink, .nw-twig.noink{cursor:default}
+.nw-twig.nolink:hover, .nw-twig.noink:hover{background:transparent; color:rgba(241,233,214,.66)}
+.nw-twig.lvl0{font-size:.88rem; padding-top:.36rem; padding-bottom:.36rem}
+.nw-tnum{flex:0 0 1.15rem; text-align:right; font-family:'Cormorant SC',serif;
+  font-size:.7rem; color:rgba(241,233,214,.4)}
+.nw-tnum.tdot{color:rgba(216,176,102,.5)}
+.nw-tmark{flex:0 0 10px; width:10px; height:10px; border-radius:50%; z-index:1;
+  background:var(--navy-2); border:2px solid var(--wp,var(--gold-lt))}
+.nw-branch:not(.d0) .nw-tmark{width:7px; height:7px; flex-basis:7px; border-width:1.5px;
+  border-color:rgba(216,176,102,.55)}
+.nw-tname{flex:1; min-width:0}
+.nw-tname small{display:block; font-family:'Cormorant SC',serif; font-size:.58rem;
+  letter-spacing:.05em; text-transform:uppercase; color:rgba(241,233,214,.42); margin-top:.05rem}
+.nw-twig.on-path{color:rgba(255,255,255,.92)}
+.nw-twig.is-active{color:#fff; border-left-color:var(--gold-lt);
+  background:linear-gradient(90deg,rgba(216,176,102,.16),transparent)}
+.nw-twig.is-active .nw-tmark{background:var(--wp,var(--gold-lt));
+  box-shadow:0 0 0 3px rgba(240,209,143,.26),0 0 10px var(--gold-glow)}
+.nw-twig.is-active .nw-tnum{color:var(--gold-lt)}
+.nw-caret{flex:0 0 auto; width:.7rem; height:.7rem; margin-left:.2rem; position:relative; opacity:.6}
+.nw-caret::before{content:"›"; position:absolute; inset:0; text-align:center;
+  transition:transform .2s; color:var(--gold-lt)}
+.nw-caret.open::before{transform:rotate(90deg)}
+.nw-tag{margin-left:auto; font-family:'Cormorant SC',serif; font-size:.52rem;
+  letter-spacing:.05em; text-transform:uppercase; padding:.05rem .38rem; border-radius:999px; white-space:nowrap}
+.nw-tag.soon{color:rgba(241,233,214,.5); border:1px solid rgba(241,233,214,.2)}
+.nw-tag.over{color:#d8efe9; background:rgba(31,107,99,.5)}
+.nw-tag.open{color:#d8efe9; background:rgba(31,107,99,.55)}
+
+/* ── BREADCRUMBS ───────────────────────────────────────────────────────── */
+.nw-crumbs{display:flex; flex-wrap:wrap; align-items:center; gap:.1rem .1rem;
+  font-family:'Cormorant SC',serif; letter-spacing:.04em; text-transform:uppercase;
+  font-size:.64rem; color:var(--ink-mute); padding:1.4rem 0 0; margin:0}
+.nw-crumbs a{color:var(--ink-mute)}
+.nw-crumbs a:hover{color:var(--teal); text-decoration:none}
+.nw-crumbs .sep{margin:0 .4rem; color:var(--line)}
+.nw-crumbs .here{color:var(--lm,var(--gold))}
+
+/* ── STORYBOOK IMAGE HEADER ────────────────────────────────────────────── */
+.nw-storybook{margin:0 0 0; position:relative; border-radius:5px; overflow:hidden;
+  border:1px solid var(--line); box-shadow:var(--shadow-m); line-height:0;
+  background:var(--cream)}
+.nw-storybook img{width:100%; height:auto; display:block;
+  aspect-ratio:16 / 9; object-fit:cover}
+.nw-storybook::after{content:""; position:absolute; inset:0; pointer-events:none;
+  box-shadow:inset 0 -60px 70px -40px rgba(20,32,58,.45), inset 0 0 0 1px rgba(255,255,255,.04)}
+
+
+.nw-utilgroup{margin-top:1rem; padding-top:.8rem; border-top:1px solid rgba(241,233,214,.1)}
+
+/* mobile chrome (hidden on desktop) */
+.nw-mobilebar{display:none}
+.nw-burger{display:none}
+.nw-overlay{display:none}
+
+/* ============================================================================
+   LANDING
+   ========================================================================== */
+.nw-hero{position:relative; overflow:hidden; color:#fbf7ed;
+  background:
+    radial-gradient(820px 420px at 78% -22%, #2b3a5c 0%, transparent 60%),
+    linear-gradient(158deg,#0f1a30 0%,#14203a 54%,#1d2a48 100%);
+  padding:5rem 0 4.4rem; border-bottom:3px solid var(--gold)}
+.nw-hero::after{content:""; position:absolute; left:50%; bottom:-3px; width:62%; height:150px;
+  transform:translateX(-50%); pointer-events:none;
+  background:conic-gradient(from 90deg at 50% 100%, transparent 0deg, rgba(216,176,102,.12) 90deg, transparent 180deg);
+  clip-path:polygon(44% 0,56% 0,100% 100%,0 100%)}
+.nw-hero-in{max-width:46rem; margin:0 auto; padding:0 2.4rem; position:relative; z-index:1}
+.nw-kick{font-family:'Cormorant SC',serif; letter-spacing:.26em; text-transform:uppercase;
+  font-size:.74rem; color:var(--gold-lt); margin-bottom:1rem}
+.nw-hero h1{font-family:'Playfair Display',serif; font-weight:800;
+  font-size:clamp(2.7rem,5.6vw,4.2rem); line-height:1.02; letter-spacing:-.022em;
+  margin:0 0 .55rem; color:#fbf7ed}
+.nw-hero .sub{font-family:'Playfair Display',serif; font-style:italic; font-weight:400;
+  font-size:clamp(1.1rem,2.2vw,1.4rem); color:rgba(241,233,214,.82); margin-bottom:1.8rem}
+.nw-hero blockquote{margin:0; font-style:italic; font-size:1.18rem; line-height:1.6;
+  color:rgba(241,233,214,.92); padding-left:1.2rem; border-left:2px solid rgba(216,176,102,.55); max-width:34rem}
+.nw-hero blockquote cite{display:block; font-style:normal; font-family:'Cormorant SC',serif;
+  letter-spacing:.1em; text-transform:uppercase; font-size:.66rem; color:var(--gold-lt); margin-top:.5rem}
+.nw-hero p.lede{margin:1.7rem 0 0; font-size:1.04rem; color:rgba(241,233,214,.78); max-width:33rem}
+
+.nw-wrap{width:100%; max-width:64rem; margin:0 auto; padding:0 2.4rem}
+.nw-band{padding:3.6rem 0 .4rem}
+.nw-bandhead{max-width:42rem; margin-bottom:1.8rem}
+.nw-eyebrow{font-family:'Cormorant SC',serif; letter-spacing:.16em; text-transform:uppercase;
+  font-size:.72rem; color:var(--gold); margin-bottom:.5rem}
+.nw-bandhead h2{font-family:'Playfair Display',serif; font-weight:700;
+  font-size:clamp(1.7rem,3.2vw,2.4rem); color:var(--navy); margin:0 0 .5rem; letter-spacing:-.01em}
+.nw-bandhead p{margin:0; font-size:1.05rem; color:var(--ink-soft)}
+
+/* posture doors */
+.nw-doors{display:grid; grid-template-columns:repeat(2,1fr); gap:1.1rem}
+.nw-door{position:relative; display:flex; flex-direction:column; overflow:hidden;
+  background:var(--cream); border:1px solid var(--line); border-radius:3px;
+  padding:1.5rem 1.4rem 1.3rem; box-shadow:var(--shadow-s);
+  transition:transform .2s ease, box-shadow .2s ease, border-color .2s ease}
+.nw-door::before{content:""; position:absolute; inset:0 auto 0 0; width:4px; background:var(--da,var(--teal))}
+.nw-door:hover{transform:translateY(-4px); box-shadow:var(--shadow-m); border-color:var(--da,var(--teal)); text-decoration:none}
+.nw-door .e{font-family:'Cormorant SC',serif; letter-spacing:.1em; text-transform:uppercase;
+  font-size:.64rem; color:var(--ink-mute); margin-bottom:.5rem}
+.nw-door h3{font-family:'Playfair Display',serif; font-weight:600; font-size:1.28rem;
+  line-height:1.16; color:var(--navy); margin:0 0 .5rem}
+.nw-door p{margin:0 0 1rem; font-size:.97rem; color:var(--ink-soft)}
+.nw-door .go{margin-top:auto; font-family:'Cormorant SC',serif; letter-spacing:.07em;
+  text-transform:uppercase; font-size:.72rem; color:var(--da,var(--teal))}
+.nw-door .go::after{content:" →"; transition:.2s}
+.nw-door:hover .go::after{margin-left:.2rem}
+
+/* the walkable map */
+.nw-map{position:relative; margin-top:.4rem}
+.nw-map::before{content:""; position:absolute; left:1.05rem; top:.6rem; bottom:.6rem; width:2px;
+  background:linear-gradient(to bottom,var(--gold-lt),var(--line) 94%)}
+.nw-stop{position:relative; padding:0 0 1.4rem 3rem}
+.nw-stop .pin{position:absolute; left:.35rem; top:.35rem; width:1.5rem; height:1.5rem; border-radius:50%;
+  background:var(--cream); border:2px solid var(--sa,var(--teal)); display:grid; place-items:center;
+  font-family:'Cormorant SC',serif; font-size:.72rem; color:var(--sa,var(--teal)); z-index:1}
+.nw-stopcard{display:block; background:var(--cream); border:1px solid var(--line);
+  border-left:4px solid var(--sa,var(--teal)); border-radius:3px; padding:1rem 1.25rem;
+  box-shadow:var(--shadow-s); transition:transform .16s ease, box-shadow .16s ease}
+a.nw-stopcard:hover{transform:translateX(3px); box-shadow:var(--shadow-m); text-decoration:none}
+.nw-stopcard h3{font-family:'Playfair Display',serif; font-weight:600; font-size:1.24rem;
+  color:var(--navy); margin:0; line-height:1.18}
+.nw-stopcard .plain{font-family:'Cormorant SC',serif; letter-spacing:.06em; text-transform:uppercase;
+  font-size:.7rem; color:var(--sa,var(--teal)); margin:.25rem 0 .45rem}
+.nw-stopcard p{margin:0; font-size:.96rem; color:var(--ink-soft)}
+.nw-stopcard .pill{display:inline-block; margin-top:.55rem; font-family:'Cormorant SC',serif;
+  letter-spacing:.07em; text-transform:uppercase; font-size:.62rem; font-weight:600;
+  padding:.18rem .55rem; border-radius:999px}
+.pill.open{color:#19514c; background:var(--teal-pale); border:1px solid #a8ceca}
+.pill.soon{color:var(--ink-mute); background:var(--cream-2); border:1px solid var(--line)}
+
+.nw-thread{display:flex; gap:.9rem; align-items:flex-start; margin:.2rem 0 1.6rem;
+  background:linear-gradient(110deg,#eef4f2,#f6efe0); border:1px dashed var(--teal);
+  border-radius:4px; padding:1rem 1.2rem}
+.nw-thread h3{font-family:'Playfair Display',serif; font-size:1.16rem; color:var(--navy); margin:0 0 .15rem}
+.nw-thread .plain{font-family:'Cormorant SC',serif; text-transform:uppercase; letter-spacing:.06em;
+  font-size:.68rem; color:var(--teal)}
+.nw-thread p{margin:.3rem 0 0; font-size:.95rem}
+
+/* ============================================================================
+   LANDMARK PAGE
+   ========================================================================== */
+main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 auto;
+  padding:2.4rem 3rem 1rem}
+.nw-milepost{position:relative; padding:1.6rem 0 1.9rem; margin-bottom:2rem;
+  border-bottom:1px solid var(--line)}
+.nw-mp-rail{display:flex; align-items:center; gap:.7rem; font-family:'Cormorant SC',serif;
+  letter-spacing:.12em; text-transform:uppercase; font-size:.66rem; color:var(--ink-mute); margin-bottom:1rem}
+.nw-mp-rail .dot{width:.5rem; height:.5rem; border-radius:50%; background:var(--lm,var(--teal))}
+.nw-mp-rail .line{flex:1; height:1px; background:linear-gradient(90deg,var(--lm,var(--teal)),var(--line))}
+.nw-mp-eyebrow{font-family:'Cormorant SC',serif; letter-spacing:.16em; text-transform:uppercase;
+  font-size:.72rem; color:var(--lm,var(--gold)); margin-bottom:.6rem}
+.nw-landmark h1{font-family:'Playfair Display',serif; font-weight:800;
+  font-size:clamp(2.3rem,4.6vw,3.4rem); line-height:1.04; letter-spacing:-.02em;
+  color:var(--navy); margin:0 0 .5rem}
+.nw-mp-plain{font-family:'Playfair Display',serif; font-style:italic; font-weight:400;
+  font-size:1.18rem; color:var(--ink-soft); margin:0 0 1.4rem}
+.nw-epigraph{margin:0; padding:.2rem 0 .2rem 1.3rem; border-left:3px solid var(--lm,var(--teal))}
+.nw-epigraph .v{font-style:italic; font-size:1.12rem; line-height:1.6; color:var(--ink)}
+.nw-epigraph cite{display:block; font-style:normal; font-family:'Cormorant SC',serif;
+  letter-spacing:.1em; text-transform:uppercase; font-size:.66rem; color:var(--lm,var(--gold)); margin-top:.5rem}
+
+/* reading prose */
+.nw-prose{max-width:var(--measure)}
+.nw-prose p{margin:0 0 1.25rem; font-size:1.06rem}
+.nw-prose > p:first-of-type::first-letter{float:left; font-family:'Playfair Display',serif;
+  font-weight:700; font-size:3.9rem; line-height:.78; padding:.35rem .6rem 0 0; color:var(--lm,var(--teal))}
+.nw-prose h2{font-family:'Playfair Display',serif; font-weight:700; font-size:1.62rem;
+  color:var(--navy); margin:2.6rem 0 .8rem; letter-spacing:-.01em}
+.nw-prose h2 .n{font-family:'Cormorant SC',serif; font-size:.8rem; letter-spacing:.1em;
+  color:var(--lm,var(--gold)); display:block; margin-bottom:.1rem; text-transform:uppercase}
+.nw-prose em{font-style:italic}
+.nw-prose strong{font-weight:600; color:var(--ink)}
+
+.nw-scripture{margin:1.7rem 0; padding:1.1rem 1.4rem; background:var(--cream);
+  border:1px solid var(--line); border-left:4px solid var(--lm,var(--teal)); border-radius:3px}
+.nw-scripture .v{font-style:italic; font-size:1.06rem; line-height:1.55; color:var(--ink)}
+.nw-scripture .ref{font-family:'Cormorant SC',serif; letter-spacing:.1em; text-transform:uppercase;
+  font-size:.64rem; color:var(--lm,var(--gold)); margin-top:.5rem}
+
+/* creeds — the church's words (upright, not italic like Scripture); a framed tablet */
+.nw-creed{margin:1.8rem 0; padding:1.3rem 1.5rem 1.2rem; background:linear-gradient(180deg,#faf4e6,var(--cream));
+  border:1px solid #d9c79c; border-top:3px solid var(--lm,var(--gold)); border-radius:4px;
+  box-shadow:var(--shadow-s)}
+.nw-creed .ttl{font-family:'Cormorant SC',serif; letter-spacing:.14em; text-transform:uppercase;
+  font-size:.7rem; font-weight:600; color:var(--lm,var(--gold)); margin:0 0 .7rem;
+  padding-bottom:.55rem; border-bottom:1px solid #e4d6b4}
+.nw-creed p{margin:0 0 .8rem; font-size:1.01rem; line-height:1.62; color:var(--ink)}
+.nw-creed p:last-child{margin-bottom:0}
+.nw-creed .ed{color:var(--ink-mute); font-style:italic}
+.nw-creed .amen{font-variant:small-caps; letter-spacing:.04em; color:var(--ink-soft)}
+
+/* heresy slogan + diagnostic cue (Hill Error exhibit) */
+.nw-prose .slogan{font-family:'Playfair Display',serif; font-style:italic; font-size:1.12rem;
+  color:var(--lm,var(--navy)); margin:.1rem 0 1rem; opacity:.92}
+.nw-diag{margin:1.1rem 0 .2rem; padding:.6rem .9rem; background:var(--cream-2);
+  border-left:3px solid var(--lm,var(--teal)); border-radius:0 3px 3px 0; font-size:.98rem; color:var(--ink-soft)}
+.nw-diag b{font-family:'Cormorant SC',serif; letter-spacing:.13em; text-transform:uppercase;
+  font-size:.6rem; color:var(--lm,var(--teal)); display:block; margin-bottom:.25rem; font-weight:600}
+
+.nw-pull{margin:2rem 0; font-family:'Playfair Display',serif; font-style:italic; font-weight:500;
+  font-size:1.5rem; line-height:1.3; color:var(--navy); text-align:center;
+  padding:1rem 1.5rem; border-top:1px solid var(--line); border-bottom:1px solid var(--line)}
+
+.nw-plain{margin:1.6rem 0; background:var(--cream-2); border:1px solid var(--line);
+  border-radius:4px; padding:1.1rem 1.35rem}
+.nw-plain .h{font-family:'Cormorant SC',serif; letter-spacing:.13em; text-transform:uppercase;
+  font-size:.66rem; color:var(--teal); margin:0 0 .5rem; font-weight:600}
+.nw-plain p{margin:0 0 .7rem; font-size:1rem; color:var(--ink-soft)}
+.nw-plain p:last-child{margin-bottom:0}
+
+/* the inline devotional companion (intimate register) */
+.nw-walk{margin:2.6rem 0 1rem; border-radius:5px; overflow:hidden;
+  border:1px solid #cfa86a; background:linear-gradient(165deg,#fbf3df,#f4ead2)}
+.nw-walk-top{display:flex; align-items:center; gap:.6rem; padding:.7rem 1.4rem;
+  background:linear-gradient(90deg,#15203a,#1d2a48); color:var(--gold-lt)}
+.nw-walk-top .ic{font-size:.9rem}
+.nw-walk-top b{font-family:'Cormorant SC',serif; letter-spacing:.18em; text-transform:uppercase;
+  font-size:.74rem; font-weight:600}
+.nw-walk-top span{margin-left:auto; font-family:'Cormorant SC',serif; font-size:.62rem;
+  letter-spacing:.08em; text-transform:uppercase; color:rgba(241,233,214,.6)}
+.nw-walk-body{padding:1.4rem 1.6rem 1.5rem; max-width:var(--measure)}
+.nw-walk-body p{margin:0 0 1rem; font-size:1.05rem; line-height:1.74; color:#3c3322}
+.nw-walk-body p:last-child{margin-bottom:0}
+.nw-walk-body .pray{font-style:italic; color:var(--ink); border-top:1px solid #d8c49a; padding-top:1rem; margin-top:1.1rem}
+
+/* road foot: prev / next */
+.nw-roadfoot{display:flex; gap:1rem; margin:2.6rem 0 1rem; flex-wrap:wrap}
+.nw-rf{flex:1 1 14rem; background:var(--cream); border:1px solid var(--line); border-radius:3px;
+  padding:.9rem 1.15rem; box-shadow:var(--shadow-s); transition:transform .16s, box-shadow .16s}
+.nw-rf:hover{transform:translateY(-2px); box-shadow:var(--shadow-m); text-decoration:none}
+.nw-rf .dir{font-family:'Cormorant SC',serif; letter-spacing:.1em; text-transform:uppercase;
+  font-size:.62rem; color:var(--ink-mute)}
+.nw-rf .nm{font-family:'Playfair Display',serif; font-weight:600; font-size:1.08rem; color:var(--navy)}
+.nw-rf.next{text-align:right}
+
+/* ── FOOTER ────────────────────────────────────────────────────────────── */
+.nw-footer{margin-top:auto; background:var(--navy); color:rgba(241,233,214,.72);
+  border-top:3px solid var(--gold)}
+.nw-footer-in{max-width:64rem; margin:0 auto; padding:2.6rem 2.4rem 2.3rem; display:grid; gap:1.2rem}
+.nw-footer h4{font-family:'Playfair Display',serif; font-size:1.3rem; color:#fbf7ed; margin:0}
+.nw-footer .q{font-style:italic; max-width:38rem; color:rgba(241,233,214,.82); margin:0}
+.nw-footer .links{display:flex; flex-wrap:wrap; gap:.4rem 1.3rem}
+.nw-footer .links a{font-family:'Cormorant SC',serif; letter-spacing:.06em; text-transform:uppercase;
+  font-size:.72rem; color:rgba(241,233,214,.78)}
+.nw-footer .links a:hover{color:var(--gold-lt); text-decoration:none}
+.nw-footer .fine{font-size:.8rem; color:rgba(241,233,214,.5);
+  border-top:1px solid rgba(241,233,214,.1); padding-top:1.05rem}
+
+/* ── ABOUT / READER'S COMPANION ─────────────────────────────────────────── */
+.nw-copy{max-width:var(--measure)}
+.nw-copy p{margin:0 0 1.15rem; font-size:1.06rem}
+.nw-copy em{font-style:italic}
+.nw-copy strong{font-weight:600; color:var(--ink)}
+.nw-gloss{margin:1.3rem 0; border:1px solid var(--line); border-radius:4px; background:var(--cream); overflow:hidden}
+.nw-gloss dt{font-family:'Playfair Display',serif; font-weight:600; color:var(--navy); font-size:1.06rem; padding:.85rem 1.3rem .12rem}
+.nw-gloss dd{margin:0; padding:.05rem 1.3rem .85rem; font-size:1rem; color:var(--ink-soft); border-bottom:1px solid var(--line)}
+.nw-gloss dd:last-child{border-bottom:none}
+
+/* ── ORCHESTRATED LOAD (staggered fade-up) ─────────────────────────────── */
+@media (prefers-reduced-motion:no-preference){
+  .nw-rise{opacity:0; transform:translateY(14px); animation:nw-rise .7s cubic-bezier(.2,.7,.2,1) forwards}
+  .nw-rise.d1{animation-delay:.05s} .nw-rise.d2{animation-delay:.16s}
+  .nw-rise.d3{animation-delay:.28s} .nw-rise.d4{animation-delay:.40s}
+  @keyframes nw-rise{to{opacity:1; transform:none}}
+}
+
+/* ── RESPONSIVE: the road becomes a drawer ─────────────────────────────── */
+@media (max-width:920px){
+  .nw-shell{grid-template-columns:1fr}
+  .nw-mobilebar{display:flex; align-items:center; gap:.8rem; position:sticky; top:0; z-index:60;
+    background:var(--navy); border-bottom:1px solid rgba(216,176,102,.3); padding:.6rem 1rem}
+  .nw-mobilebar b{font-family:'Cormorant SC',serif; letter-spacing:.12em; text-transform:uppercase;
+    font-size:.84rem; color:#fbf7ed}
+  .nw-mobilebar b span{color:var(--gold-lt)}
+  .nw-burger{display:inline-flex; flex-direction:column; justify-content:center; gap:4px;
+    width:38px; height:34px; background:transparent; border:1px solid rgba(241,233,214,.25);
+    border-radius:7px; cursor:pointer}
+  .nw-burger span{display:block; height:2px; width:20px; margin:0 auto; background:#fbf7ed}
+  .nw-sidebar{position:fixed; inset:0 auto 0 0; width:330px; max-width:88vw; transform:translateX(-100%);
+    z-index:65; height:100vh; overflow-y:auto; -webkit-overflow-scrolling:touch;
+    transition:transform .25s ease}
+  .nw-sidebar.open{transform:none; box-shadow:0 0 50px rgba(0,0,0,.5)}
+  .nw-overlay{display:block; position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:55;
+    opacity:0; pointer-events:none; transition:opacity .25s}
+  .nw-overlay.open{opacity:1; pointer-events:auto}
+  .nw-doors{grid-template-columns:1fr}
+  main.nw-landmark{padding:1.8rem 1.3rem}
+  .nw-wrap,.nw-hero-in,.nw-footer-in{padding-left:1.3rem; padding-right:1.3rem}
+  .nw-crumbs{padding-top:1rem}
+}
+@media (min-width:921px){.nw-mobilebar{display:none}}
+
+/* ── ROOMS INDEX (estate landmark pages link their rooms) ──────────────── */
+.nw-rooms{margin:2.2rem 0 1rem; border-top:1px solid var(--line); padding-top:1.4rem}
+.nw-rooms-h{font-family:'Cormorant SC',serif; letter-spacing:.14em; text-transform:uppercase;
+  font-size:.72rem; color:var(--lm,var(--gold)); margin:0 0 1rem}
+.nw-roomgrid{display:grid; grid-template-columns:repeat(2,1fr); gap:.9rem}
+.nw-roomcard{display:block; background:var(--cream); border:1px solid var(--line);
+  border-left:4px solid var(--lm,var(--teal)); border-radius:3px; padding:.9rem 1.1rem;
+  box-shadow:var(--shadow-s); transition:transform .16s, box-shadow .16s}
+.nw-roomcard:hover{transform:translateY(-3px); box-shadow:var(--shadow-m); text-decoration:none}
+.nw-roomcard .rm{font-family:'Cormorant SC',serif; letter-spacing:.08em; text-transform:uppercase;
+  font-size:.6rem; color:var(--ink-mute); margin-bottom:.2rem}
+.nw-roomcard h3{font-family:'Playfair Display',serif; font-weight:600; font-size:1.16rem;
+  color:var(--navy); margin:0 0 .3rem; line-height:1.15}
+.nw-roomcard p{margin:0; font-size:.93rem; color:var(--ink-soft)}
+.nw-roomcard .pill{display:inline-block; margin-top:.5rem; font-family:'Cormorant SC',serif;
+  letter-spacing:.07em; text-transform:uppercase; font-size:.58rem; font-weight:600;
+  padding:.12rem .5rem; border-radius:999px}
+@media (max-width:920px){.nw-roomgrid{grid-template-columns:1fr}}
+.nw-roomcard .pill{color:#19514c; background:var(--teal-pale); border:1px solid #a8ceca}
