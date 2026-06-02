@@ -146,9 +146,11 @@ body.nw{
    ========================================================================== */
 .nw-hero{position:relative; overflow:hidden; color:#fbf7ed;
   background:
-    radial-gradient(820px 420px at 78% -22%, #2b3a5c 0%, transparent 60%),
+    linear-gradient(100deg, rgba(12,20,40,.88) 0%, rgba(14,22,40,.74) 38%, rgba(18,30,55,.42) 66%, rgba(20,34,62,.30) 100%),
+    radial-gradient(820px 420px at 78% -22%, rgba(43,58,92,.55) 0%, transparent 60%),
+    url("img/hero-pilgrim.jpg") center 32% / cover no-repeat,
     linear-gradient(158deg,#0f1a30 0%,#14203a 54%,#1d2a48 100%);
-  padding:5rem 0 4.4rem; border-bottom:3px solid var(--gold)}
+  padding:5.4rem 0 4.8rem; border-bottom:3px solid var(--gold)}
 .nw-hero::after{content:""; position:absolute; left:50%; bottom:-3px; width:62%; height:150px;
   transform:translateX(-50%); pointer-events:none;
   background:conic-gradient(from 90deg at 50% 100%, transparent 0deg, rgba(216,176,102,.12) 90deg, transparent 180deg);
@@ -398,3 +400,25 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
   padding:.12rem .5rem; border-radius:999px}
 @media (max-width:920px){.nw-roomgrid{grid-template-columns:1fr}}
 .nw-roomcard .pill{color:#19514c; background:var(--teal-pale); border:1px solid #a8ceca}
+
+/* ── The Map of the Way — illustrated art page ──────────────────────────── */
+.nw-mapart{margin:2.2rem 0 1rem; padding:0}
+.nw-mapart-frame{
+  border:1px solid var(--line); border-radius:14px; overflow:hidden;
+  background:linear-gradient(160deg,#f6efe0,#efe6d4); box-shadow:var(--shadow-lg);
+  padding:0.8rem}
+.nw-mapart-frame img{display:block; width:100%; height:auto; border-radius:8px}
+.nw-mapart-placeholder{
+  aspect-ratio:16/10; display:flex; flex-direction:column; align-items:center; justify-content:center;
+  gap:.4rem; text-align:center; border:2px dashed rgba(160,120,48,.4); border-radius:8px;
+  color:var(--ink-muted); background:
+    radial-gradient(600px 300px at 50% 30%, rgba(216,176,102,.10), transparent 70%)}
+.nw-mapart-placeholder .nw-mapart-mark{font-size:2rem; color:var(--gold); opacity:.7}
+.nw-mapart-placeholder p{margin:.1rem 0; font-family:'Playfair Display',serif; font-size:1.15rem; color:var(--ink-soft)}
+.nw-mapart-placeholder p.sub{font-family:'Crimson Pro',serif; font-size:.95rem; color:var(--ink-muted); font-style:italic}
+.nw-mapart figcaption{
+  text-align:center; font-family:'Cormorant SC',serif; letter-spacing:.06em; text-transform:uppercase;
+  font-size:.74rem; color:var(--ink-muted); margin-top:.9rem}
+.nw-backtomap{display:inline-block; margin:1.4rem 0 0; font-family:'Cormorant SC',serif;
+  letter-spacing:.07em; text-transform:uppercase; font-size:.72rem; color:var(--ink-muted)}
+.nw-backtomap:hover{color:var(--teal); text-decoration:none}
