@@ -523,3 +523,14 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 .nw-glossitem{padding:.85rem 0; border-bottom:1px solid var(--line)}
 .nw-glossitem dt{font-family:'Cormorant SC',serif; letter-spacing:.02em; font-size:1.06rem; color:var(--teal); font-weight:600; margin-bottom:.25rem}
 .nw-glossitem dd{margin:0; font-size:1rem; line-height:1.68; color:var(--ink-soft)}
+
+/* ── Tactic leaves: the lede line and the hypothetical "scene" box ──────── */
+.nw-tactic-lede{font-size:1.1rem; line-height:1.65; color:var(--ink-soft); border-left:3px solid var(--lm,var(--gold));
+  padding-left:1rem; margin:0 0 1.4rem}
+.nw-tactic-lede strong{font-family:'Cormorant SC',serif; letter-spacing:.03em; color:var(--ink)}
+.nw-scene{margin:1.5rem 0; padding:1.1rem 1.3rem; border-radius:12px;
+  background:linear-gradient(160deg,#f3eee2,#efe7d6); border:1px solid var(--line)}
+.nw-scene-h{font-family:'Cormorant SC',serif; letter-spacing:.06em; text-transform:uppercase; font-size:.74rem;
+  color:var(--ink-mute); margin:0 0 .5rem}
+.nw-scene p:last-child{margin-bottom:0; font-style:italic; color:var(--ink-soft); line-height:1.7}
+.nw-rooms-sub{font-size:.97rem; color:var(--ink-mute); margin:.2rem 0 1rem; line-height:1.6}
