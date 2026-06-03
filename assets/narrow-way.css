@@ -427,3 +427,19 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 .nw-footer .fine.ai-note{margin-top:.7rem; opacity:.85; max-width:48rem}
 .nw-footer .fine.ai-note a{color:var(--gold-lt); text-decoration:underline; text-underline-offset:2px}
 .nw-footer .fine.ai-note a:hover{color:#fff}
+
+/* The numbered key beneath the illustrated map */
+.nw-mapkey{margin:1.8rem auto 0; max-width:60rem}
+.nw-mapkey-h{font-family:'Cormorant SC',serif; letter-spacing:.08em; text-transform:uppercase;
+  font-size:.8rem; color:var(--ink-muted); text-align:center; margin:0 0 1rem}
+.nw-mapkey-list{list-style:none; margin:0; padding:0;
+  display:grid; grid-template-columns:repeat(2,1fr); gap:.5rem 2rem}
+.nw-mapkey-list li{display:flex; align-items:baseline; gap:.7rem; font-family:'Crimson Pro',serif;
+  font-size:1.02rem; border-bottom:1px solid var(--line); padding:.32rem .1rem}
+.nw-mapkey-list .n{flex:0 0 auto; display:inline-flex; align-items:center; justify-content:center;
+  width:1.55rem; height:1.55rem; border-radius:50%; background:#f7f1e2; border:1.5px solid var(--gold);
+  color:#5a4317; font-family:'Playfair Display',serif; font-weight:700; font-size:.82rem;
+  font-feature-settings:"lnum"; line-height:1}
+.nw-mapkey-list a{color:var(--ink-soft); text-decoration:none}
+.nw-mapkey-list a:hover{color:var(--teal); text-decoration:underline; text-underline-offset:2px}
+@media (max-width:620px){ .nw-mapkey-list{grid-template-columns:1fr} }
