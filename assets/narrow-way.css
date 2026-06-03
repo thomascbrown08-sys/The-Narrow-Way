@@ -490,3 +490,36 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 /* Combined tier: Direct / Entailed — reserved for cornerstone passages, the case for each given */
 .nw-warrant.t-direct-entailed{border-left-color:#5a8a72; border-image:linear-gradient(180deg,var(--teal),var(--gold)) 1}
 .nw-warrant.t-direct-entailed .tier{background:linear-gradient(90deg,var(--teal-pale),#f6ecd4); color:#4a6b3a}
+
+/* ── Scripture-box explainer page ──────────────────────────────────────── */
+.nw-lede{font-size:1.12rem; line-height:1.7; color:var(--ink-soft)}
+.nw-chip{display:inline-block; font-family:'Cormorant SC',serif; letter-spacing:.03em; font-size:.86rem;
+  background:#f5eedd; border:1px solid var(--line); border-radius:999px; padding:.1rem .6rem; color:var(--ink-soft); white-space:nowrap}
+.nw-tierguide{display:grid; grid-template-columns:repeat(2,1fr); gap:1rem; margin:1.4rem 0}
+.nw-tiercard{border:1px solid var(--line); border-left-width:4px; border-radius:10px; padding:1rem 1.1rem;
+  background:linear-gradient(180deg,#fbf7ed,#f6efdfcc); box-shadow:var(--shadow-s)}
+.nw-tiercard p{margin:.5rem 0 0; font-size:.97rem; line-height:1.62; color:var(--ink-soft)}
+.nw-tiercard .tier{font-family:'Crimson Pro',serif; font-style:italic; font-size:.9rem;
+  padding:.12rem .65rem; border-radius:999px; white-space:nowrap}
+.nw-tiercard.t-direct{border-left-color:var(--teal)} .nw-tiercard.t-direct .tier{background:var(--teal-pale); color:var(--teal)}
+.nw-tiercard.t-entailed{border-left-color:var(--gold)} .nw-tiercard.t-entailed .tier{background:#f6ecd4; color:#8a6516}
+.nw-tiercard.t-direct-entailed{border-left-color:#5a8a72; border-image:linear-gradient(180deg,var(--teal),var(--gold)) 1}
+.nw-tiercard.t-direct-entailed .tier{background:linear-gradient(90deg,var(--teal-pale),#f6ecd4); color:#4a6b3a}
+.nw-tiercard.t-interpretation{border-left-color:#b8862f} .nw-tiercard.t-interpretation .tier{background:#f3e6cb; color:#9a6b18}
+.nw-tiercard.t-contested{border-left-color:#8b806a} .nw-tiercard.t-contested .tier{background:#ece8df; color:#6e6450}
+.nw-tiercard.t-historical{border-left-color:#5a6b78} .nw-tiercard.t-historical .tier{background:#e7edf1; color:#3f5663}
+.nw-fineprint{font-size:.92rem; color:var(--ink-mute); font-style:italic; margin-top:1rem}
+@media (max-width:680px){ .nw-tierguide{grid-template-columns:1fr} }
+
+/* the "what does this mean?" link inside each warrant box summary */
+.nw-warrant>summary .whatlink{margin-left:.5rem; font-family:'Crimson Pro',serif; font-style:italic;
+  font-size:.8rem; color:var(--ink-mute); text-decoration:underline; text-underline-offset:2px; white-space:nowrap}
+.nw-warrant>summary .whatlink:hover{color:var(--teal)}
+
+/* ── Glossary ──────────────────────────────────────────────────────────── */
+.nw-glosssection{margin:2rem 0}
+.nw-glosssection h3{margin-bottom:.4rem}
+.nw-glosslist{margin:0; padding:0}
+.nw-glossitem{padding:.85rem 0; border-bottom:1px solid var(--line)}
+.nw-glossitem dt{font-family:'Cormorant SC',serif; letter-spacing:.02em; font-size:1.06rem; color:var(--teal); font-weight:600; margin-bottom:.25rem}
+.nw-glossitem dd{margin:0; font-size:1rem; line-height:1.68; color:var(--ink-soft)}
