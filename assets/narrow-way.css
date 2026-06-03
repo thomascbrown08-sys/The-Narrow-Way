@@ -482,3 +482,11 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 .nw-warrant.t-interpretation .tier{background:#f3e6cb; color:#9a6b18}
 .nw-warrant.t-contested{border-left-color:#8b806a}
 .nw-warrant.t-contested .tier{background:#ece8df; color:#6e6450}
+
+/* Fifth tier: Historical — warrant resting on evidence outside the text (manuscripts, archaeology, the historian's reasoning) */
+.nw-warrant.t-historical{border-left-color:#5a6b78}
+.nw-warrant.t-historical .tier{background:#e7edf1; color:#3f5663}
+
+/* Combined tier: Direct / Entailed — reserved for cornerstone passages, the case for each given */
+.nw-warrant.t-direct-entailed{border-left-color:#5a8a72; border-image:linear-gradient(180deg,var(--teal),var(--gold)) 1}
+.nw-warrant.t-direct-entailed .tier{background:linear-gradient(90deg,var(--teal-pale),#f6ecd4); color:#4a6b3a}
