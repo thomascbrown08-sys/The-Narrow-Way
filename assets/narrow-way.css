@@ -544,3 +544,6 @@ main.nw-landmark{width:100%; max-width:calc(var(--measure) + 6rem); margin:0 aut
 .nw-history p{margin:0 0 .8rem; font-size:1.02rem; line-height:1.7; color:var(--ink-soft)}
 .nw-history p:last-child{margin-bottom:0}
 .nw-history .nw-q{font-style:italic; color:var(--ink)}
+
+/* page-hero header image on reference pages (About, Glossary) — sits within the text column */
+.nw-pagehero{margin:2.4rem 0 0}
